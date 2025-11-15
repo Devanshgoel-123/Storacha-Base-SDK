@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 export default function MintPanel() {
   const [to, setTo] = useState("");
   const [amount, setAmount] = useState("");
-  const [decimals, setDecimals] = useState(process.env.NEXT_PUBLIC_TOKEN_DECIMALS ?? "18");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +29,7 @@ export default function MintPanel() {
       const res = await fetch("/api/token/mint", {
         method: "POST",
         headers,
-        body: JSON.stringify({ to, amount, decimals }),
+        body: JSON.stringify({ to, amount }),
       });
 
       const json = await res.json();
@@ -57,7 +56,6 @@ export default function MintPanel() {
       <form onSubmit={handleMint} className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Input value={to} onChange={(e)=>setTo(e.target.value)} placeholder="Recipient address" className="md:col-span-2" />
         <Input value={amount} onChange={(e)=>setAmount(e.target.value)} placeholder="Amount" />
-        <Input value={decimals} onChange={(e)=>setDecimals(e.target.value)} placeholder="Decimals" className="md:col-span-1" />
 
         <div className="md:col-span-3 flex gap-2 mt-2">
           <Button type="submit" disabled={loading}>{loading ? "Sending…" : "Mint"}</Button>

@@ -9,10 +9,6 @@ import { LayoutDashboard, Send, Zap } from "lucide-react";
 import Link from "next/link";
 import styles from "../page.module.css";
 
-// Token components
-import TokenStatus from "@/components/TokenStatus";
-import TokenGate from "@/components/TokenGate";
-
 export default function Home() {
   const { setMiniAppReady, isMiniAppReady, context } = useMiniKit();
 
@@ -57,11 +53,6 @@ export default function Home() {
             <WalletConnect />
           </div>
 
-          {/* Token Status in Agent header */}
-          <div className="mb-3">
-            <TokenStatus required={10} />
-          </div>
-
           {/* Dashboard Link */}
           <div className="mb-3">
             <Link href="/dashboard">
@@ -80,10 +71,6 @@ export default function Home() {
             <ChatInterface />
           </div>
 
-          {/* Token gated PPT under the chat (quick access) */}
-          <div className="mt-6">
-            <TokenGate required={10} filePath="/assets/flowsend_ppt_token_gated.pptx" />
-          </div>
         </div>
       </div>
     </div>

@@ -96,7 +96,7 @@ export default function DashboardPage() {
     <div>
       {/* Overview metrics row (always show on overview view) */}
       {view === "overview" && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <Card className="p-4">
             <h3 className="text-sm text-slate-500">USDC Balance</h3>
             <div className="text-xl font-bold">{usdcFormatted}</div>
@@ -109,17 +109,7 @@ export default function DashboardPage() {
             <div className="text-xs text-slate-500 mt-1">Utility token — staking & benefits</div>
           </Card>
 
-          <Card className="p-4">
-            <h3 className="text-sm text-slate-500">Total Sent</h3>
-            <div className="text-xl font-bold">{totalSent}</div>
-            <div className="text-xs text-slate-500 mt-1">Lifetime</div>
-          </Card>
-
-          <Card className="p-4">
-            <h3 className="text-sm text-slate-500">Gas Saved</h3>
-            <div className="text-xl font-bold">{gasSaved}</div>
-            <div className="text-xs text-slate-500 mt-1">Sponsorship & optimizations</div>
-          </Card>
+        
         </div>
       )}
 

@@ -15,7 +15,6 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const to = (body?.to || "").trim();
     const amountStr = (body?.amount || "").toString().trim();
-    const decimalsOverride = body?.decimals;
 
     if (!to || !amountStr) {
       return NextResponse.json({ error: "Missing to or amount" }, { status: 400 });
@@ -24,7 +23,6 @@ export async function POST(req: Request) {
     const result = await mintTokenDirect({
       to,
       amount: amountStr,
-      decimals: decimalsOverride,
     });
 
     return NextResponse.json(result);

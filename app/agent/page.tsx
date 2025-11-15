@@ -9,8 +9,12 @@ import { LayoutDashboard, Send, Zap } from "lucide-react";
 import Link from "next/link";
 import styles from "../page.module.css";
 
+// Token components
+import TokenStatus from "@/components/TokenStatus";
+import TokenGate from "@/components/TokenGate";
+
 export default function Home() {
-  const { setMiniAppReady, isMiniAppReady,context } = useMiniKit();
+  const { setMiniAppReady, isMiniAppReady, context } = useMiniKit();
 
   // Initialize the miniapp
   useEffect(() => {
@@ -19,14 +23,13 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-
       <div className={styles.content}>
         <div className={styles.waitlistForm}>
           {/* Header */}
           <div className="text-center mb-6">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <Send className="w-8 h-8 text-blue-600" />
-              <h1 className='text-3xl font-bold'>
+              <h1 className="text-3xl font-bold">
                 Flow<span className="text-blue-600">Send</span> AI
               </h1>
             </div>
@@ -40,15 +43,10 @@ export default function Home() {
               <div className="flex items-center justify-start space-x-2">
                 <div className="flex items-center space-x-1 text-green-600">
                   <Zap className="w-4 h-4" />
-                  <span className="text-xs font-medium">
-                    Gas Free Transactions
-                  </span>
+                  <span className="text-xs font-medium">Gas Free Transactions</span>
                 </div>
               </div>
-              <Badge
-                variant="secondary"
-                className="bg-yellow-100 text-yellow-800"
-              >
+              <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
                 Base Sepolia Testnet
               </Badge>
             </div>
@@ -57,6 +55,11 @@ export default function Home() {
           {/* Wallet Connection */}
           <div className="mb-3">
             <WalletConnect />
+          </div>
+
+          {/* Token Status in Agent header */}
+          <div className="mb-3">
+            <TokenStatus required={10} />
           </div>
 
           {/* Dashboard Link */}
@@ -75,6 +78,11 @@ export default function Home() {
           {/* Chat interface */}
           <div className="mt-8">
             <ChatInterface />
+          </div>
+
+          {/* Token gated PPT under the chat (quick access) */}
+          <div className="mt-6">
+            <TokenGate required={10} filePath="/assets/flowsend_ppt_token_gated.pptx" />
           </div>
         </div>
       </div>

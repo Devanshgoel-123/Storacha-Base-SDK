@@ -36,7 +36,7 @@ const staggerContainer = {
 
 export default function LandingPage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white relative">
             <Navbar />
 
             {/* Hero Section */}
@@ -127,7 +127,7 @@ export default function LandingPage() {
                                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </Link>
-                            <Link href="https://www.youtube.com/watch?v=FlFVucAgkOc" target='_blank'>
+                            <Link href="https://www.youtube.com/watch?v=FlFVucAgkOc" target="_blank" rel="noreferrer">
                                 <Button size="lg" variant="outline" className="px-8">
                                     View Demo
                                 </Button>
@@ -221,7 +221,8 @@ export default function LandingPage() {
 
                                     <div className="relative z-10">
                                         <div
-                                            className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-${step.color}-500 to-${step.color}-600 flex items-center justify-center mb-6 shadow-lg`}
+                                            className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
+                                            style={{ background: `linear-gradient(135deg, var(--tw-gradient-stops))` }}
                                         >
                                             <step.icon className="w-7 h-7 text-white" />
                                         </div>
@@ -350,108 +351,6 @@ export default function LandingPage() {
                                 </div>
                             </Card>
                         </motion.div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Technology Section */}
-            <section id="technology" className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        className="text-center mb-16"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                            Powered By Leading Web3 Technology
-                        </h2>
-                        <p className="text-xl text-gray-600">Trusted infrastructure from industry leaders</p>
-                    </motion.div>
-
-                    <motion.div
-                        className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto"
-                        variants={staggerContainer}
-                        initial="initial"
-                        whileInView="animate"
-                        viewport={{ once: true }}
-                    >
-                        {[
-                            {
-                                name: 'Base',
-                                description: 'Ethereum L2 blockchain',
-                                logo: 'https://payload-marketing.moonpay.com/api/media/file/base%20logo.webp',
-                                color: 'blue',
-                            },
-                            {
-                                name: 'Circle',
-                                description: 'Regulated stablecoin',
-                                logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvkjXOH6zL6LC42Z4SCOg73wAnKyCKXND5gg&s',
-                                color: 'green',
-                            },
-                            {
-                                name: 'Coinbase',
-                                description: 'Smart wallet provider',
-                                logo: 'https://storage.googleapis.com/papyrus_images/36738434158653f796ed98c3a4426f31',
-                                color: 'blue',
-                            },
-                            {
-                                name: 'USDC',
-                                description: 'USD stablecoin',
-                                logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Circle_USDC_Logo.svg/2048px-Circle_USDC_Logo.svg.png',
-                                color: 'green',
-                            },
-                        ].map((tech, i) => (
-                            <motion.div key={i} variants={fadeInUp}>
-                                <Card className="p-6 text-center bg-white hover:shadow-lg transition-all hover:-translate-y-1 duration-300">
-                                    <div className="text-5xl">
-                                        <Image
-                                            src={tech.logo}
-                                            alt={`${tech.name} Logo`}
-                                            width={64}
-                                            height={64}
-                                            className="mx-auto"
-                                        />
-                                    </div>
-                                    <h3 className="text-lg font-bold">{tech.name}</h3>
-                                    <p className="text-sm text-gray-600">{tech.description}</p>
-                                </Card>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        className="bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 rounded-3xl p-12 md:p-16 text-center text-white relative overflow-hidden"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-                        <div className="relative z-10 max-w-3xl mx-auto">
-                            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                                Experience the Future of Global Payments
-                            </h2>
-                            <p className="text-xl mb-8 text-white/90">
-                                Send money instantly to anyone, anywhere. Zero gas fees. Bank-level security.
-                            </p>
-                            <Link href="/agent">
-                                <Button
-                                    size="lg"
-                                    variant="secondary"
-                                    className="bg-white text-gray-900 hover:bg-gray-100 px-8 group"
-                                >
-                                    Get Started Free
-                                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </Button>
-                            </Link>
-                        </div>
                     </motion.div>
                 </div>
             </section>

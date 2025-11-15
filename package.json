@@ -23,6 +23,7 @@
     "@tailwindcss/postcss": "^4.1.14",
     "@tanstack/react-query": "^5.81.5",
     "@types/jsonwebtoken": "^9.0.10",
+    "@wagmi/connectors": "^6.1.4",
     "ai": "^4.3.19",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

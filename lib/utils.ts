@@ -16,6 +16,7 @@ export const CHAIN_CONFIG = {
 // Contract Addresses
 export const CONTRACTS = {
   USDC: "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as const,
+  FST: "0xE86B2B54fee37c52df16757a2Cc24972e082c9Ec" as const,
 } as const;
 
 // Demo addresses for testing

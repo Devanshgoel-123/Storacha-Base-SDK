@@ -108,7 +108,7 @@
     viem "^2.31.7"
     zustand "5.0.3"
 
-"@base-org/account@^2.2.0", "@base-org/account@^2.4.0":
+"@base-org/account@2.4.0", "@base-org/account@^2.2.0", "@base-org/account@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@base-org/account/-/account-2.4.0.tgz#fb4ac1d1f7fed221de356a319d2eccf1c0a0cea4"
   integrity sha512-A4Umpi8B9/pqR78D1Yoze4xHyQaujioVRqqO3d6xuDFw9VRtjg6tK3bPlwE0aW+nVH/ntllCpPa2PbI8Rnjcug==
@@ -809,6 +809,14 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@gemini-wallet/core/-/core-0.2.0.tgz#6d7c82614d811f7f23b4018808684a39e0dd111f"
   integrity sha512-vv9aozWnKrrPWQ3vIFcWk7yta4hQW1Ie0fsNNPeXnjAxkbXr2hqMagEptLuMxpEP2W3mnRu05VDNKzcvAuuZDw==
+  dependencies:
+    "@metamask/rpc-errors" "7.0.2"
+    eventemitter3 "5.0.1"
+
+"@gemini-wallet/core@0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@gemini-wallet/core/-/core-0.3.2.tgz#fd6fd2df91d50be6c1a832c46379453e933a352e"
+  integrity sha512-Z4aHi3ECFf5oWYWM3F1rW83GJfB9OvhBYPTmb5q+VyK3uvzvS48lwo+jwh2eOoCRWEuT/crpb9Vwp2QaS5JqgQ==
   dependencies:
     "@metamask/rpc-errors" "7.0.2"
     eventemitter3 "5.0.1"
@@ -3483,6 +3491,21 @@
     cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
     porto "0.2.19"
 
+"@wagmi/connectors@^6.1.4":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@wagmi/connectors/-/connectors-6.2.0.tgz#b90bb85c59305d36f4ca3247fe31c148db5d110b"
+  integrity sha512-2NfkbqhNWdjfibb4abRMrn7u6rPjEGolMfApXss6HCDVt9AW2oVC6k8Q5FouzpJezElxLJSagWz9FW1zaRlanA==
+  dependencies:
+    "@base-org/account" "2.4.0"
+    "@coinbase/wallet-sdk" "4.3.6"
+    "@gemini-wallet/core" "0.3.2"
+    "@metamask/sdk" "0.33.1"
+    "@safe-global/safe-apps-provider" "0.18.6"
+    "@safe-global/safe-apps-sdk" "9.1.0"
+    "@walletconnect/ethereum-provider" "2.21.1"
+    cbw-sdk "npm:@coinbase/wallet-sdk@3.9.3"
+    porto "0.2.35"
+
 "@wagmi/core@2.22.1", "@wagmi/core@^2.16.7":
   version "2.22.1"
   resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-2.22.1.tgz#de4b5019971dcf033ea5f7484add66900da7897c"
@@ -5833,6 +5856,11 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
+hono@^4.10.3:
+  version "4.10.6"
+  resolved "https://registry.yarnpkg.com/hono/-/hono-4.10.6.tgz#b80cf3903b3d12b02c472dadf28d046874e89e5a"
+  integrity sha512-BIdolzGpDO9MQ4nu3AUuDwHZZ+KViNm+EZ75Ae55eMXMqLVhDFqEMXxtUe9Qh8hjL+pIna/frs2j6Y2yD5Ua/g==
+
 hono@^4.9.6:
   version "4.10.2"
   resolved "https://registry.yarnpkg.com/hono/-/hono-4.10.2.tgz#a78d322f2c5fabebb1887f7ae1632a6524513e74"
@@ -7182,6 +7210,18 @@ porto@0.2.19:
   integrity sha512-q1vEJgdtlEOf6byWgD31GHiMwpfLuxFSfx9f7Sw4RGdvpQs2ANBGfnzzardADZegr87ZXsebSp+3vaaznEUzPQ==
   dependencies:
     hono "^4.9.6"
+    idb-keyval "^6.2.1"
+    mipd "^0.0.7"
+    ox "^0.9.6"
+    zod "^4.1.5"
+    zustand "^5.0.1"
+
+porto@0.2.35:
+  version "0.2.35"
+  resolved "https://registry.yarnpkg.com/porto/-/porto-0.2.35.tgz#7e926bf1434283fda9581cc10ed203b16b41d175"
+  integrity sha512-gu9FfjjvvYBgQXUHWTp6n3wkTxVtEcqFotM7i3GEZeoQbvLGbssAicCz6hFZ8+xggrJWwi/RLmbwNra50SMmUQ==
+  dependencies:
+    hono "^4.10.3"
     idb-keyval "^6.2.1"
     mipd "^0.0.7"
     ox "^0.9.6"

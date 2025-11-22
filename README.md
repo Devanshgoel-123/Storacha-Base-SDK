@@ -14,9 +14,36 @@ It offers essential utilities, common data models, and standardized request/resp
 ## Monorepo Structure
 
 ```
-sdk-base/          # Core Storacha Base SDK (@storacha/base-sdk)
-packages/          # Shared models, utils, and constants
-examples/          # Example scripts showing SDK usage
+storacha-base-payments/
+├─ contracts/
+│  ├─ contracts/StoragePayments.sol
+│  ├─ scripts/deploy.ts
+│  ├─ test/storagePayments.test.ts
+│  └─ hardhat.config.ts
+├─ backend/
+│  ├─ src/
+│  │  ├─ listener.ts                # listens to Deposit events, credits DB
+│  │  ├─ pricing.ts                 # credits math & conversion
+│  │  ├─ ucan.ts                    # UCAN creation helper (server-side)
+│  │  └─ prismaClient.ts
+│  ├─ prisma/
+│  │  └─ schema.prisma
+│  └─ package.json
+├─frontend/                            # Next.js app
+│ ├─ app/                            
+│ │  ├─ api/
+│ │  │  └─ storacha/
+│ │  │     ├─ upload/route.ts
+│ │  │     ├─ list/route.ts
+│ │  │     ├─ get/route.ts
+│ │  │     └─ delete/route.ts
+│ │  └─ components/
+│ │     ├─ StorachaFiles.tsx
+│ │     └─ TopUpCredits.tsx
+├─ sdk/ 
+├─ .env.example
+└─ README.md
+
 ```
 
 ## Quick Start

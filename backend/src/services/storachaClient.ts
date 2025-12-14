@@ -1,5 +1,4 @@
 // src/services/storachaClient.ts
-import * as Client from "@storacha/client";
 import { create } from "@storacha/client";
 import { Signer } from "@storacha/client/dist/principal/ed25519";
 import * as Proof from "@storacha/client/dist/proof";
@@ -29,7 +28,8 @@ export async function computeCID(fileMap: Record<string, Uint8Array>): Promise<s
   try {
     if (Object.keys(fileMap).length === 1) {
       const [_, content] = Object.entries(fileMap)[0];
-      const file = new Blob([content]);
+      const safeUint8 = Uint8Array.from(content);
+      const file = new Blob([safeUint8]);
       let rootCID: any;
 
       await createFileEncoderStream(file)

@@ -6,17 +6,15 @@ import {
   computeCIDForBuffer,
   uploadBufferToStoracha,
   PREVIEW_LOCAL_PATH,
-} from "../services/StorachaClient";
+} from "../services/storachaClient";
 import * as Delegation from "@ucanto/core/delegation";
 import { DID } from "@ucanto/core";
 import { Link } from "@ucanto/core/schema";
-import User from "../models/User";
 import StoredObject from "../models/StoredObject";
 import { computeUploadRequiredCredits } from "../services/pricing";
 import { buildDepositTxData } from "../services/payments";
 
 import multer from "multer";
-const upload = multer();
 
 /**
  * Create UCAN delegation that grants access to a particular file root within the current space.
@@ -249,7 +247,7 @@ export const deposit = async (req: Request, res: Response) => {
 /**
  * Returns a simple quote object. For now we map to computeUploadRequiredCredits.
  */
-export const GetQuoteForFileUpload = async (req: Request, res: Response) => {
+export const getQuoteForFileUpload = async (req: Request, res: Response) => {
   try {
     const duration = parseInt((req.query.duration as string) || "0", 10);
     const size = parseInt((req.query.size as string) || "0", 10);
@@ -264,7 +262,7 @@ export const GetQuoteForFileUpload = async (req: Request, res: Response) => {
 /**
  * Returns user upload history (minimal model).
  */
-export const GetUserUploadHistory = async (req: Request, res: Response) => {
+export const getUserUploadHistory = async (req: Request, res: Response) => {
   try {
     const userAddress = ((req.query.userAddress as string) || "").toLowerCase();
     if (!userAddress) return res.status(400).json({ message: "Missing user address" });

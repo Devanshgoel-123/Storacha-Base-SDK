@@ -1,32 +1,33 @@
-import express from "express";
+import { Request, Response } from "express";
 import multer from "multer";
 import fs from "fs";
 import StoredObject from "../models/StoredObject";
 import User from "../models/User";
 import { ENV } from "../config/env";
-import { uploadBufferToStoracha, computeCIDForBuffer, PREVIEW_LOCAL_PATH } from "../services/StorachaClient";
+import { uploadBufferToStoracha, computeCIDForBuffer, PREVIEW_LOCAL_PATH } from "../services/storachaClient";
 import { computeUploadRequiredCredits } from "../services/pricing";
 
-const router = express.Router();
 const uploadDir = ENV.UPLOAD_TEMP_DIR;
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
-const multerUpload = multer({ storage, limits: { fileSize: ENV.MAX_FILE_SIZE } });
+export const multerUpload = multer({ storage, limits: { fileSize: ENV.MAX_FILE_SIZE } });
 
-router.get("/health", (_, res) => res.json({ success: true, uptime: process.uptime() }));
+export const getHealth = (_req: Request, res: Response) => {
+  res.json({ success: true, uptime: process.uptime() });
+};
 
-router.get("/api/storage/account", async (req, res) => {
+export const getAccount = async (req: Request, res: Response) => {
   const walletRaw = (req.query.wallet as string) || (req.headers["x-wallet"] as string);
   const wallet = walletRaw ? walletRaw.toLowerCase() : "";
   if (!wallet) return res.status(400).json({ success: false, error: "wallet required" });
   const user = await User.findOne({ wallet }).exec();
   res.json({ success: true, data: { wallet, credits: user ? user.credits : 0, preview: PREVIEW_LOCAL_PATH } });
-});
+};
 
-router.get("/api/storage/preflight", async (req, res) => {
+export const getPreflight = async (req: Request, res: Response) => {
   try {
     const size = Number(req.query.size || 0);
     const retention = Number(req.query.ttl || ENV.STORAGE_DEFAULT_TTL_SECONDS);
@@ -45,9 +46,9 @@ router.get("/api/storage/preflight", async (req, res) => {
     console.error(err);
     res.status(500).json({ success: false, error: "server-error" });
   }
-});
+};
 
-router.post("/api/storage/upload", multerUpload.single("file"), async (req, res) => {
+export const uploadFile = async (req: Request, res: Response) => {
   try {
     const walletRaw = (req.headers["x-wallet"] as string) || req.body.wallet;
     const wallet = walletRaw ? walletRaw.toLowerCase() : "";
@@ -88,9 +89,9 @@ router.post("/api/storage/upload", multerUpload.single("file"), async (req, res)
     console.error(e);
     res.status(500).json({ success: false, error: "upload-failed" });
   }
-});
+};
 
-router.get("/api/storage/download/:objectId", async (req, res) => {
+export const downloadFile = async (req: Request, res: Response) => {
   try {
     const walletRaw = (req.headers["x-wallet"] as string) || "";
     const wallet = walletRaw ? walletRaw.toLowerCase() : "";
@@ -101,7 +102,7 @@ router.get("/api/storage/download/:objectId", async (req, res) => {
     if (!obj) return res.status(404).json({ success: false, error: "not found" });
     if (obj.owner !== wallet) return res.status(403).json({ success: false, error: "forbidden" });
 
-    const { buffer, contentType } = await (await import("../services/StorachaClient")).fetchObjectFromStoracha?.(objectId) ?? { buffer: null, contentType: "application/octet-stream" };
+    const { buffer, contentType } = await (await import("../services/storachaClient")).fetchObjectFromStoracha(objectId);
     if (!buffer) return res.status(500).json({ success: false, error: "download-failed" });
 
     res.setHeader("Content-Type", contentType);
@@ -110,9 +111,9 @@ router.get("/api/storage/download/:objectId", async (req, res) => {
     console.error(err);
     res.status(500).json({ success: false, error: "download-failed" });
   }
-});
+};
 
-router.post("/api/storage/delete", async (req, res) => {
+export const deleteFile = async (req: Request, res: Response) => {
   try {
     const walletRaw = (req.headers["x-wallet"] as string) || req.body.wallet;
     const wallet = walletRaw ? walletRaw.toLowerCase() : "";
@@ -131,6 +132,4 @@ router.post("/api/storage/delete", async (req, res) => {
     console.error(err);
     res.status(500).json({ success: false, error: "delete-failed" });
   }
-});
-
-export default router;
+};
